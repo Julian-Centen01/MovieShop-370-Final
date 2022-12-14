@@ -13,16 +13,22 @@ router.post("/signUp", (req, res) => {
         });
 });
 
-// // // create a todo
-// app.post("/signUp", async (req, res) => {
-//   // await waits for the function to complete before it continues
-//   // accessable through the above async
-//    try {
-//        const { userName } = req.body
-//        const newUser = await pool.query("INSERT INTO users (username) VALUES($1) RETURNING *",[userName] )
-//        res.json(newUser.rows[0])
-//    } catch (err) {
-//        console.error(err.message);
-//    }
-// })
+router.post("/login", (req,res) => {
+    movie_model.userExists(req.body.username,req.body.password),
+    (err,result) => {
+    if(err) {
+        res.send({err:err})
+    }
+    if(result.length > 0){
+        res.send(result)
+    } else{
+        res.send({ message: "Invalid username/password!"})
+    }
+}
+})
+
+router.get("/profile", (req,res) => {
+    res.json("profile")
+})
+
 module.exports = router;

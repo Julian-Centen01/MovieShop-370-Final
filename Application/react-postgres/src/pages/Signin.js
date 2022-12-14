@@ -1,109 +1,83 @@
-import React from 'react';
-// import '../css/styles.css';
-// import '../css/bootstrap.css';
+import React, { useState } from 'react';
 import {Link} from 'react-router-dom';
-import Navbar from '../components/navbar/navbar.js';
-import {Button, ButtonGroup, Col, Form, FormGroup, Row, Stack} from "react-bootstrap";
-// will any of these work?
-// <link rel="preconnect" href="https://fonts.googleapis.com"></link>;
-// <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin></link>;
-// <link href="https://fonts.googleapis.com/css2?family=Merriweather&family=Montserrat&family=Sacramento&display=swap" rel="stylesheet"></link>;
-
-class Signin extends React.Component {
-    render() {
-        return (
-            <main>
-                {/*<Navbar/>*/}
-
-                <div className="container-lg">
-                    <div className="text-center">
-                        <h2>Login</h2>
-                        <p className="lead">Login instructions blah</p>
-                    </div>
-
-                    <div className="row justify-content-center my-5">
-
-                        <div className="col-8 col-lg-5">
-                            <Form
-                                className="border p-5 text-light bg-light k shadow-lg rounded"> {/*Padding for signin */} {/*ADD AN ONCLICK EVENT*/}
-                                <FormGroup direction="horizontal" gap={2}>
-                                    <Form.Label>Email address</Form.Label>
-                                    <Form.Control type="email" placeholder="Enter email"/>
-                                </FormGroup>
-                                <Row className="list-group-horizontal my-1">
-                                    <Col>
-                                        <Link className="btn btn-danger" to="/ForgotPW">
-                                            Forgot Password
-                                        </Link>
-                                    </Col>
-                                    <Col className={"text-end"}> {/*this puts the buttons aligned to the right*/}
-                                        <ButtonGroup>
-                                            <Link onclick="signIn()" className="btn btn-primary" to="/">
-                                                Sign In
-                                            </Link>
-                                            <Link className="btn btn-success" to="/Signup">
-                                                Sign Up
-                                            </Link>
-                                            {/*<Button to="/" className='btn btn-primary'>Sign In</Button>*/}
-                                            {/*<Button to="/Signup" className='btn btn-success'>Sign Up</Button>*/}
-
-                                        </ButtonGroup>
-                                    </Col>
+import '../css/styles.css';
+import '../css/bootstrap.css';
+import BG from "../images/flecks.png";
+import Navbar from '../components/navbar/navbar';
+<link rel="preconnect" href="https://fonts.googleapis.com"></link>;
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin></link>;
+<link href="https://fonts.googleapis.com/css2?family=Merriweather&family=Montserrat&family=Sacramento&display=swap" rel="stylesheet"></link>;
 
 
-                                </Row>
+const Signin  = () => 
+{
+    const [username, setUsername] = useState("")    
+    const [password, setPassword] = useState("")
 
+    const onSubmitForm = async e => {
+        // prevents page from refreshing
+        e.preventDefault()
+        try {
+            const body = { username, password }
+            
+            const response = await fetch("http://localhost:3001/login",{
+                 method: "POST",
+                 headers: { "Content-Type": "application/json"},
+                body: JSON.stringify(body)
+            })
+            console.log(response)
+            
+        } catch (err) {
+            console.error(err.message)
+        }
+    }
+    return (
+      // <body style={{backgroundImage: `url(${MyBackground})`}}>
+      <main>
+        <Navbar/>
+      <body >
+        
+      <div class="login">
+      <form class="form" id="login" onSubmit={onSubmitForm}>
+          <h1 class="form__title">Login</h1>
+          <div class="form__message form__message--error"></div>
+          <div class="form__input-group">
+              <input 
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)} 
+                    className="form__input" 
+                    autofocus placeholder="Username"
+                />
+              <div class="form__input-error-message"></div>
+          </div>
+          <div class="form__input-group">
+                <input 
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)} 
+                    className="form__input" 
+                    autofocus placeholder="Password"
+                />
+              <div class="form__input-error-message"></div>
+          </div>
+                
+                  <button type="submit" className="btn btn-primary btn form__button">
+                  Sign In
+                  {/* <Link to="/Navigation" className='btn btn-primary'>Sign In</Link> */}
+                  </button>
+                  <div className="form__input-error-message"></div>
+                  <button  class="btn btn-success form__button" >
+                      <Link to="/Signup" className='btn btn-success'>Sign Up</Link>
+                  </button>
+                  <div className="form__input-error-message"></div>
+                  <button type="button" class="btn btn-danger form__button" >
+                      <Link to="/ForgotPW" className='btn btn-danger'>Forgot Password</Link>
+                  </button>               
 
-                            </Form>
+              </form>
+        </div>
+        </body>
+    </main>
 
-                        </div>
-
-                    </div>
-
-
-                </div>
-
-
-                {/*    <div className="login">*/}
-                {/*        <Form className="width-small">*/}
-                {/*            <Form.Group>*/}
-                {/*                <Form.Label>Email address</Form.Label>*/}
-                {/*                <Form.Control type="email" placeholder="Enter email" />*/}
-                {/*                <Form.Text className="text-muted">*/}
-                {/*                    We'll never share your email with anyone else.*/}
-                {/*                </Form.Text>*/}
-                {/*            </Form.Group>*/}
-                {/*        </Form>*/}
-                {/*        <form className="form" id="login">*/}
-                {/*            <h1 className="form__title">Login</h1>*/}
-                {/*            <div className="form__message form__message--error"></div>*/}
-                {/*            <div className="form__input-group">*/}
-                {/*                <input type="text" className="form__input" autoFocus placeholder="Username or email"/>*/}
-                {/*                <div className="form__input-error-message"></div>*/}
-                {/*            </div>*/}
-                {/*            <div className="form__input-group">*/}
-                {/*                <input type="password" className="form__input" autoFocus placeholder="Password"/>*/}
-                {/*                <div className="form__input-error-message"></div>*/}
-                {/*            </div>*/}
-
-
-                {/*            <ButtonGroup>*/}
-                {/*                <Link to="/Home" className='btn btn-primary'>Sign In</Link>*/}
-                {/*                <Link to="/Signup" className='btn btn-success'>Sign Up</Link>*/}
-                {/*            </ButtonGroup>*/}
-                {/*            <p>*/}
-                {/*                <Link className="btn btn-danger" to="/ForgotPW">*/}
-                {/*                    Forgot Password*/}
-                {/*                </Link>*/}
-                {/*                /!* <button type='button' className=" form__button btn btn-danger">*/}
-                {/*   0 <a href='ForgotPW'>Forgot Password</a>*/}
-                {/*</button> *!/*/}
-                {/*            </p>*/}
-                {/*        </form>*/}
-                {/*    </div>*/}
-            </main>
         );
     }
-}
-
 export default Signin

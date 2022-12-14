@@ -7,22 +7,8 @@ a:hover{
 }
 
 body {
-    --color-primary: #009579;
-    --color-primary-dark: #007f67;
-    --color-secondary: #252c6a;
-    --color-error: #cc3333;
-    --color-success: #4bb544;
-    --border-radius: 4px;   
-  height: 100vh;
-  margin: 0;
-  font-size: 18px;
-  background-image: url(../images/loginbgrnd.png);
-  background-size:1920px 1080px ;
-  background-position: center;
-  background-repeat: no-repeat;
+  background-image: url("../images/flecks.png"); 
 }
-  
-
   .login{
     float: right;
     height: 600px;

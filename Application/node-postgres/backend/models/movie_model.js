@@ -1,5 +1,5 @@
-const {query, db} = require("./posgres-queries");
-
+const {query} = require("./posgres-queries");
+const bcrypt = require('bcrypt')
 const getMovie = () => {
     return query("SELECT * FROM movies")
         .then(({rows}) => rows);
@@ -10,10 +10,10 @@ const getUser = () => {
         .then(({rows}) => rows);
 }
 
-const postUser = ({userName, password, email}) => {
+const postUser = ({username, password, email})  => {
     return query(`INSERT INTO users (username, password, email)
                   VALUES ($1, $2, $3) RETURNING *`,
-        [userName, password, email])
+        [username, password, email])
         .then(({rows}) => rows);
 }
 
@@ -24,9 +24,25 @@ const searchMovie = (body) => {
         .then(({rows}) => rows);
 };
 
+const userExists = ({username, password}) => {
+    return query(`SELECT * FROM users  
+    WHERE username = $1 AND password = $2`,
+[username, password])
+.then(({rows}) => rows);
+}
+
+const friendList = ({id}) => {
+    query('SELECT u.* FROM users u INNER JOIN friends f on u.id = f.friend_id WHERE f.user_id=$1', [id])
+        .then(({rows}) => rows);
+}
+
+
+
 module.exports = {
     searchMovie,
     getMovie,
     postUser,
-    getUser
+    getUser,
+    friendList,
+    userExists,
 }
