@@ -15,14 +15,11 @@ class Navbar extends React.Component {
                         <img src={Logo} alt=""/>
                     </a>
                     <ul className="navbar-nav text">
-                        <li className="nav-item active">
-                            <a className="nav-link" href="/Shop">SHOP </a>
-                        </li>
                         <li className="nav-item">
                             <a className="nav-link" href="/movie-search">SEARCH A MOVIE</a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="/Checkout">CHECKOUT</a>
+                            <a className="nav-link" href="/Cart">CART</a>
                         </li>
                         <li className="nav-item">
                             <a className="nav-link" href="/Chat">CHAT</a>

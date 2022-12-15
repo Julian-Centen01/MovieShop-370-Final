@@ -7,7 +7,7 @@ import Signup from './pages/Signup';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import Signin from './pages/Signin';
 import Shop from './pages/Shop';
-import Checkout from './pages/Checkout';
+import Cart from './pages/Cart';
 import ForgotPW from './pages/ForgotPW';
 import Chat from "./pages/chat";
 import MovieSearch from "./pages/movie-search";
@@ -32,7 +32,7 @@ function App() {
                     <Route path="/movie-search" element={<MovieSearch/>}/>
                     <Route path="/Signin" element={<Signin/>}/>
                     <Route path="/Shop" element={<Shop/>}/>
-                    <Route path="/Checkout" element={<Checkout/>}/>
+                    <Route path="/Cart" element={<Cart/>}/>
                     <Route path="/Profile" element={<Profile/>}/>
                     <Route path="/Chat" element={<Chat/>}/>
                     {/* <Route path="/shop" element={<Shop />} /> */}
